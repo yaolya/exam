@@ -1,19 +1,21 @@
 #pragma once
+#include <iostream>
 #include "storage.h"
-#include <cmath>
 #include "error.h"
 
 class Hp {
 private:
-	Storage<int> m_n; //нормальный вектор
-	Storage<int> m_x0; //точка,через которую проходит гиперплоскость	
+	Storage<int> m_n; //РЅРѕСЂРјР°Р»СЊРЅС‹Р№ РІРµРєС‚РѕСЂ
+	Storage<int> m_x0; //С‚РѕС‡РєР°,С‡РµСЂРµР· РєРѕС‚РѕСЂСѓСЋ РїСЂРѕС…РѕРґРёС‚ РіРёРїРµСЂРїР»РѕСЃРєРѕСЃС‚СЊ	
 	int m_size;
 public:
 	Hp(Storage<int>& n, Storage<int>& x0, int razm);
 
 	double distance(Storage<int>& point);
 
+	void position(Storage<int>& point);
+
 	bool operator==(Hp& hp2);
 
-
+	int getSizeofHp() { return --m_size; }
 };
