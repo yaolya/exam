@@ -3,16 +3,16 @@
 	Hp::Hp(Storage<int>& n, Storage<int>& x0, int razm) {
 		m_n = n;
 		m_x0 = x0;
-		m_size = razm - 1;
+		m_size = razm;
 	}
 
 	double Hp::distance(Storage<int>& point) {
 		if (point.size() != m_size) throw Error();
 		int sum = 0;
 		for (int i = 0; i < m_size; ++i) {
-			sum += pow((point[i] - m_x0[i]) * m_n[i], 2);
+			sum += (point[i] - m_x0[i]) * m_n[i];
 		}
-		int lengthp_x0 = sqrt(sum);
+		int lengthp_x0 = sum;
 		sum = 0;
 		for (int i = 0; i < m_size; ++i) {
 			sum += pow(m_n[i], 2);
@@ -25,7 +25,7 @@
 		bool b = true;
 		if (m_size == hp2.m_size) {
 			for (int i = 0; i < m_size; ++i) {
-				if (!(m_x0[i] == hp2.m_x0[i] && (m_n[i] % hp2.m_n[i] == 0 || hp2.m_n[i] % m_n[i] == 0))) b = false;
+				if (!(m_x0[i] == hp2.m_x0[i] && ((m_n[i] % hp2.m_n[i]) == 0 || (hp2.m_n[i] % m_n[i]) == 0))) b = false;
 			}
 		}
 		else {
@@ -36,4 +36,14 @@
 			}
 		}
 		return b;
+	}
+
+	void Hp::position(Storage<int>& point) {
+		int sum = 0;
+		for (int i = 0; i < m_size; ++i) {
+			sum += (point[i] - m_x0[i]) * m_n[i];
+		}
+		if (sum > 0) std::cout << "point is situated in +" << std::endl;
+		if (sum < 0) std::cout << "point is situated in -" << std::endl;
+		if (sum == 0) std::cout << "point belongs" << std::endl;
 	}
